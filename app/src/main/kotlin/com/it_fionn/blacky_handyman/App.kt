@@ -3,13 +3,18 @@
  */
 package com.it_fionn.blacky_handyman
 
+import com.it_fionn.blacky_handyman.config.Configuration
+
 class App {
-    val greeting: String
-        get() {
-            return "Hello World!"
-        }
+    fun run() {
+        val blacky_handyman = BlackyHandyman(
+            config = Configuration.load()
+        )
+
+        blacky_handyman.start()
+    }
 }
 
 fun main() {
-    println(App().greeting)
+    App().run()
 }
