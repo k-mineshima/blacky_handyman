@@ -9,6 +9,7 @@ plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.9.23"
     id("org.flywaydb.flyway") version "10.11.1"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.23"
 
     // Apply the application plugin to add support for building a CLI application in Java.
     application
@@ -44,6 +45,7 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-java-time:0.49.0")
 
     implementation("net.dv8tion:JDA:5.0.0-beta.23")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
