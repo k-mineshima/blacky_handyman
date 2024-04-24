@@ -12,11 +12,10 @@ data class Database(
     val databaseName: String,
     val user: String,
     val password: String,
-    val timezone: String,
     @SerialName("pool-size")
     val poolSize: Int,
 ) {
     fun getDatabaseUrl(): String {
-        return "jdbc:${this.vendor}://${this.host}:${this.port}/${this.databaseName}?serverTimezone=${this.timezone}"
+        return "jdbc:${this.vendor}://${this.host}:${this.port}/${this.databaseName}"
     }
 }

@@ -4,6 +4,8 @@ import com.it_fionn.blacky_handyman.config.Configuration
 import org.jetbrains.exposed.sql.Database
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.requests.GatewayIntent
+import com.zaxxer.hikari.HikariConfig
+import com.zaxxer.hikari.HikariDataSource
 
 class BlackyHandyman(
     private val config: Configuration
@@ -17,11 +19,14 @@ class BlackyHandyman(
     }
 
     private fun connectDatabase() {
-        Database.connect(
-            this.config.database.getDatabaseUrl(),
-            driver = this.config.database.driver,
-            user = this.config.database.user,
-            password = this.config.database.password,
-        )
+        val hikariConfig: HikariConfig = HikariConfig().also {
+            it.jdbcUrl = this.config.database.getDatabaseUrl()
+            it.driverClassName = this.config.database.driver
+            it.username = this.config.database.user
+            it.password = this.config.database.password
+            it.maximumPoolSize = this.config.database.poolSize
+        }
+
+        Database.connect(HikariDataSource(hikariConfig))
     }
 }
