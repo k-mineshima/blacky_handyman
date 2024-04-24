@@ -17,7 +17,6 @@
         "database": "blacky_handyman",
         "username": "user",
         "password": "password",
-        "timezone": "JST",
         "pool-size": 10
     }
 }
