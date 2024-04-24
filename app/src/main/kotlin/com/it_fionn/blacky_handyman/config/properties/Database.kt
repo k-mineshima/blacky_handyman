@@ -1,5 +1,9 @@
 package com.it_fionn.blacky_handyman.config.properties
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Database(
     val vendor: String,
     val driver: String,
@@ -9,6 +13,7 @@ data class Database(
     val user: String,
     val password: String,
     val timezone: String,
+    @SerialName("pool-size")
     val poolSize: Int,
 ) {
     fun getDatabaseUrl(): String {
