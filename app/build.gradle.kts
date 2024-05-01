@@ -7,10 +7,18 @@
 
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
-    id("org.jetbrains.kotlin.jvm") version "1.9.0"
+    id("org.jetbrains.kotlin.jvm") version "1.9.23"
+    id("org.flywaydb.flyway") version "10.11.1"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.23"
 
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+}
+
+buildscript {
+    dependencies {
+        classpath("org.flywaydb:flyway-mysql:10.11.1")
+    }
 }
 
 repositories {
@@ -29,6 +37,17 @@ dependencies {
 
     // This dependency is used by the application.
     implementation("com.google.guava:guava:32.1.1-jre")
+
+    implementation("mysql:mysql-connector-java:8.0.33")
+    implementation("org.jetbrains.exposed:exposed-core:0.49.0")
+    implementation("org.jetbrains.exposed:exposed-dao:0.49.0")
+    implementation("org.jetbrains.exposed:exposed-jdbc:0.49.0")
+    implementation("org.jetbrains.exposed:exposed-java-time:0.49.0")
+    implementation("com.zaxxer:HikariCP:5.1.0")
+
+    implementation("net.dv8tion:JDA:5.0.0-beta.23")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -46,4 +65,10 @@ application {
 tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+
+flyway {
+    url = System.getenv("BLACKY_HANDYMAN_FLYWAY_URL")
+    user = System.getenv("BLACKY_HANDYMAN_FLYWAY_USER")
+    password = System.getenv("BLACKY_HANDYMAN_FLYWAY_PASSWORD")
 }
