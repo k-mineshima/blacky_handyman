@@ -17,13 +17,15 @@ class MessageReceivedListener(): ListenerAdapter() {
         val member: Member = event.member ?: return
 
         if (event.message.contentDisplay == "${prefix}leave") {
+            member.mute(true).queue()
             member.modifyNickname("${member.effectiveName}(離席中)").queue()
-            event.message.reply("ニックネームに離席中を付与しました。いってらっしゃい :wave:").queue()
+            event.message.reply("ミュートにし、離席中に設定しました。いってらっしゃい :wave:").queue()
         }
 
         if (event.message.contentDisplay == "${prefix}back") {
+            member.mute(false).queue()
             member.modifyNickname(member.effectiveName.replace("(離席中)", "")).queue()
-            event.message.reply("ニックネームから離席中を削除しました。おかえりなさい :thumbsup:").queue()
+            event.message.reply("ミュートを外し、離席中を削除しました。おかえりなさい :thumbsup:").queue()
         }
     }
 }
