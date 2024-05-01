@@ -3,6 +3,7 @@ package com.it_fionn.blacky_handyman
 import com.it_fionn.blacky_handyman.config.Configuration
 import com.it_fionn.blacky_handyman.app.listeners.GuildJoinListener
 import com.it_fionn.blacky_handyman.app.listeners.GuildVoiceUpdateListener
+import com.it_fionn.blacky_handyman.app.listeners.MessageReceivedListener
 import org.jetbrains.exposed.sql.Database
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.requests.GatewayIntent
@@ -22,6 +23,7 @@ class BlackyHandyman(
               .addEventListeners(
                 GuildJoinListener(this.config.discordbot.defaultPrefix),
                 GuildVoiceUpdateListener(),
+                MessageReceivedListener(),
               )
               .build()
         }
