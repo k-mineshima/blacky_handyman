@@ -2,6 +2,7 @@ package com.it_fionn.blacky_handyman
 
 import com.it_fionn.blacky_handyman.config.Configuration
 import com.it_fionn.blacky_handyman.app.listeners.GuildJoinListener
+import com.it_fionn.blacky_handyman.app.listeners.GuildVoiceUpdateListener
 import org.jetbrains.exposed.sql.Database
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.requests.GatewayIntent
@@ -17,8 +18,11 @@ class BlackyHandyman(
 
     fun start() {
         val discordbot = JDABuilder.createDefault(this.config.discordbot.token).let {
-            it.enableIntents(GatewayIntent.MESSAGE_CONTENT)
-              .addEventListeners(GuildJoinListener(this.config.discordbot.defaultPrefix))
+            it.enableIntents(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_VOICE_STATES)
+              .addEventListeners(
+                GuildJoinListener(this.config.discordbot.defaultPrefix),
+                GuildVoiceUpdateListener(),
+              )
               .build()
         }
     }
