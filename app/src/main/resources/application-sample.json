@@ -14,8 +14,8 @@
         "driver": "com.mysql.cj.jdbc.Driver",
         "host": "localhost",
         "port": 3306,
-        "database": "blacky_handyman",
-        "username": "user",
+        "databaseName": "blacky_handyman",
+        "user": "user",
         "password": "password",
         "pool-size": 10
     }
