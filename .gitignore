@@ -6,3 +6,7 @@ build
 
 application*.json
 !application-sample.json
+
+# intellij idea
+.idea
+
